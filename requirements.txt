@@ -1,0 +1,8 @@
+beautifulsoup4
+requests
+pandas
+lxmlbeautifulsoup4
+requests
+pandas
+lxml
+flask

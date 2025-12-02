@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.3"> 
+<title>Map of Universities and Colleges in the United States</title>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+<meta property="og:image" content="images/university.jpg"/>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<link rel="shortcut icon" href="../images/bayoulogo.ico">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127677839-1"></script>
+<script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'UA-127677839-1');
+  </script>
+</head>
+<body>
+<div id="menu">
+  <div class="brand">
+    <h5><a href="https://databayou.com" class="brand">DATABAYOU &nbsp;</a></h5>
+    <h6><a href="https://databayou.com">Home &nbsp; </a> 
+        <a href="https://databayou.com/about.html"> About &nbsp; </a> 
+        <a href="https://databayou.com/resources.html"> Resources &nbsp; </a>
+        <a href="https://databayou.com/contact.html">Contact &nbsp; &nbsp;</a>
+    </h6>
+  </div>  
+</div>   
+  <div id="topad">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- banner over viz -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7188606770245550"
+     data-ad-slot="2700730129"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+    <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <div class="main" id="main"> 
+<div id="instructions">
+    <h1>Map of Universities and Colleges in the U.S.A.</h1>
+<p>This is an interactive map of Postsecondary Schools in the United States. It differentiates Universities, Colleges, Institutes, and Other. For names, address, county, city, and location hover over the map. For more detail, zoom in. For more information, scroll down.</p> 
+</div>
+<div id="grafica"> 
+  <div id="map"></div><script src="scripts/college.js"></script>
+    <div id="legend">
+     <table class="map">
+  <tr><th colspan="8">&#127979; University Key &#127979;</th></tr>
+  <tr><td style="color:dodgerblue">&#9679;</td><td>University</td><td style="color:#ee4266;">&#9679;</td><td>College</td><td style="color:blueviolet;">&#9679;</td><td>Institute</td><td style="color:lime;">&#9679;</td><td>Other</td><tr>
+</table>
+  </div>
+</div>
+  <div id="advert">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Banner below visualization -->
+    <ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7188606770245550"
+     data-ad-slot="9325353383"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+    <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div> 
+<div id="info">
+  <div class="left">
+    <h2>Postsecondary Education in the United States</h2>
+<p>Postsecondary education, is also known as tertiary education. This is the education level that follows secondary education.</p>
+<p>Postsecondary education includes universities and colleges, as well as trade and vocational schools.</p>
+<p>Postsecondary education encompasses both <a target="_blank" rel="noopener noreferrer" href="https://databayou.com/education/edu.html">undergraduate and postgraduate</a> students and usually culminates with a diploma, certification or academic degree.</p>
+<p>The United States is home to one of the most extensive and diverse higher education systems in the world.<p>
+<p>With thousands of universities and colleges spread across all 50 states, students have a wide array of choices when it comes to pursuing higher education.</p>
+<p>There are over 6,000 colleges and universities in the United States.</p>
+<p>Of these schools, 3,982 are degree-granting postsecondary institutions. Source: <a target="_blank" rel="noopener noreferrer" href="https://www.bestcolleges.com/blog/how-many-colleges-in-us/">BestColleges</a>.</p>
+<p>If you want to learn more about colleges Amazon has the <a target="_blank" rel="noopener noreferrer" href="https://amzn.to/3S5mtvU">FISKE Guide to Colleges 2025</a>. </p>
+<p>Fiske is the most authoritative source of information for college-bound students and their parents. Helpful, honest, and straightforward, the Fiske Guide to Colleges delivers an insider's look at what it's really like to be a student at the "best and most interesting" schools in the United States</p>
+<p>These numbers vary each year due to mergers, closures, and other factors.</p>
+      <a href="https://databayou.com/usofa/museums.html"><div class="related">
+      <img class="internal" alt="Map of Museums in the USA" src="../images/geo/museums.jpg">
+      <div class="interpub"><h4>This map shows you where are the Museums in the U.S.</h4></div>
+      </div></a>
+    <h2>States with Most Universities</h2>
+<p><b>According to the data from National Center for Education Statistics (NCES), used in this map, the state with most Postsecondary Education Institutions is California, followed by Texas</b>.</p>
+<p>It is important to highlight that California has a larger <a target="_blank" rel="noopener noreferrer" href="https://databayou.com/north/population.html">population</a> than Texas.</p>
+<p>These institutions can be broadly categorized into:</p>
+<ul>
+  <li><b>Public Colleges and Universities:</b> Roughly 1,600 institutions, including state universities and community colleges, which are funded by state governments.</li>
+  <li><b>Private Nonprofit Universities:</b> Approximately 1,700 institutions, including prestigious Ivy League schools and liberal arts colleges.</li>
+  <li><b>Private For-Profit Colleges:</b> Around 700 institutions, many of which focus on vocational and career-oriented education.</li>
+</ul>
+<br>
+<div class="midadvert">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- midad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7188606770245550"
+     data-ad-slot="1994636898"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>      
+</div>
+<br>
+    <h2>Types of Higher Education Institutions</h2>
+<p>The American higher education system is diverse and includes different types of institutions, each serving a unique role:</p>
+    <h3>Community Colleges (Two-Year Colleges)</h3>
+<p>These institutions offer associate degrees and vocational programs, with more than 900 public community colleges across the U.S.</p>
+    <h3>Public and Private Universities</h3>
+<p>Offering bachelor’s, master’s, and doctoral degrees, public universities are typically larger and state-funded, while private universities often have smaller student populations and rely on tuition and endowments.</p>
+    <h3>Liberal Arts Colleges</h3>
+<p>These institutions focus on undergraduate education with an emphasis on broad-based learning in the humanities, sciences, and social sciences.</p>
+    <h3>Research Universities</h3>
+<p>These schools, such as MIT, Stanford, and Harvard, focus on advanced research and graduate-level education.</p>
+    <h3>For-Profit Colleges</h3>
+<p>Primarily career-focused institutions offering certificates and degrees in specialized fields.</p>
+      <a href="https://databayou.com/usofa/golf.html"><div class="related">
+      <img class="internal" alt="Map of Golf Courts and clubs in the USA" src="../images/geo/golf.jpg">
+      <div class="interpub"><h4>This map shows Golf Courts and Clubs in the U.S.</h4></div>
+      </div></a>
+    <h2>Largest University Systems in the U.S.</h2>
+<p>Several states operate large public university systems with multiple campuses. Some of the largest include:</p>
+<ul>
+  <li>California State University System (CSU) – 23 campuses, enrolling over 450,000 students.</li>
+  <li>State University of New York (SUNY) System – 64 campuses, serving nearly 400,000 students.</li>
+  <li>University of California (UC) System – 10 campuses, including prestigious institutions like UC Berkeley and UCLA.</li>
+  <li>Texas A&M University System – Over a dozen campuses across Texas.</li>
+</ul>
+<br>
+<div class="midadvert">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- midad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7188606770245550"
+     data-ad-slot="1994636898"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>      
+</div>
+<br>
+<br>
+<div id="followme">
+  <h4>Follow Me</h4>
+    <a href="https://twitter.com/databayou"><img class="follow" src="../images/twitter_logo.png" alt="twitter logo"></a>
+    <a href="https://www.pinterest.com/marinaestuarios/"><img class="follow" src="../images/pintrest_logo.png" alt="Pintrest logo"></a>
+    <a href="https://www.instagram.com/databayou/?hl=en"><img class="follow" src="../images/instagram_logo.png" alt="instagram logo"></a>
+    <a href="https://www.facebook.com/Databayou/"><img class="follow" src="../images/facebook_logo.png" alt="facebook logo"></a>
+</div>
+  <h2>Resources for Map of Colleges and Universities in the U.S.</h2>
+<p>The data was downloaded from the <a target="_blank" rel="noopener noreferrer" href="https://data-nces.opendata.arcgis.com/">National Center for Education Statistics (NCES).</a>. </p>
+<p>Data cleaning was done with Pandas Python.</p>
+<p>The Shapefiles for this map were downloaded from <a href="https://www.naturalearthdata.com/downloads/">Natural Earth</a>.</p>
+<p>Made by <a href="https://databayou.com">Luz K. Molina</a> with D3.js.</p>
+   <!-- Begin Mailchimp Signup Form -->
+      <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+      <div id="mc_embed_signup">
+      <form action="https://databayou.us7.list-manage.com/subscribe/post?u=a93052d1ec57138cccfc1494b&amp;id=bb86288c30" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <div id="mc_embed_signup_scroll">
+      <label for="mce-EMAIL">Subscribe</label>
+      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a93052d1ec57138cccfc1494b_bb86288c30" tabindex="-1" value=""></div>
+      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+      </div>
+      </form>
+      </div>
+      <!--End mc_embed_signup-->      
+    </div>
+  <p class="affiliate"><a href="https://databayou.com/affiliate.html">Affiliate Disclosure</a></p>  
+  </div>
+  <div id="footerad">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- bottomsq -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7188606770245550"
+     data-ad-slot="8446362851"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  </div>
+  <div id="imagespin">
+  <img id="screen" src="images/colleges.jpg" alt="Map of Colleges and Universities across the USA">
+</div>
+  </div><!-- main -->
+<div id="menu2">
+<div class="brand">
+  <h5><a href="https://databayou.com" class="brand">DATABAYOU &nbsp;</a></h5>
+  <h6><a href="https://databayou.com/resources.html"> Resources &nbsp;</a>
+      <a href="https://databayou.com/disclaimer.html">Disclaimer &nbsp;</a>
+      <a href="https://databayou.com/privacy.html">Privacy Policy</a>
+    </h6>
+  </div>  
+</div>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl502102'},{'dcenter':'p3'},{'cp_id':'8244013'},{'cp_cache':''},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>

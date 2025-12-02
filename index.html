@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Players Map</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <style>
+      html,body,#map{height:100%;margin:0}
+      #map{min-height:60vh}
+      /* Report dropdown styles */
+      #report-container{padding:8px;background:transparent}
+      #report-toggle{background:#000;color:#ffdf00;border:1px solid #333;padding:6px 10px;border-radius:4px;cursor:pointer}
+      /* Report panel: keep background black; report body can contain colored spans */
+      #report-panel{background:#000;color:#ffdf00;padding:12px;margin-top:8px;border-radius:4px;max-height:60vh;overflow:auto}
+      #report-panel .report-root{font-family:inherit}
+      #report-panel pre{white-space:pre-wrap;color:inherit;font-family:inherit;background:transparent;border:none;padding:0;margin:0}
+      .report-label{font-weight:700;color:#ffdf00;margin-bottom:6px}
+      .report-block{margin-bottom:10px}
+      /* Transcript controls reuse same style */
+      #transcript-container{padding:8px;background:transparent}
+      #transcript-toggle{background:#000;color:#ffdf00;border:1px solid #333;padding:6px 10px;border-radius:4px;cursor:pointer}
+      #transcript-panel{background:#000;color:#ffdf00;padding:12px;margin-top:8px;border-radius:4px;max-height:40vh;overflow:auto}
+      /* For troubleshooting: force all transcript text to yellow */
+      <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <title>Players Map</title>
+          <link rel="stylesheet" href="/static/styles.css">
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+          <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+          <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+          <style>
+            html,body,#map{height:100%;margin:0}
+            #map{min-height:60vh}
+            /* Report dropdown styles */
+            #report-container{padding:8px;background:transparent}
+            #report-toggle{background:#000;color:#ffdf00;border:1px solid #333;padding:6px 10px;border-radius:4px;cursor:pointer}
+            #report-panel{background:#000;color:#ffdf00;padding:12px;margin-top:8px;border-radius:4px;max-height:60vh;overflow:auto}
+            #report-panel pre{white-space:pre-wrap;color:#ffdf00;font-family:inherit}
+            /* Hide explicit assistant labels (we keep user labels visible while preserving color cues) */
+            .report-block.report-assistant .report-label{display:none}
+            /* Transcript controls reuse same style */
+            #transcript-container{padding:8px;background:transparent}
+            #transcript-toggle{background:#000;color:#ffdf00;border:1px solid #333;padding:6px 10px;border-radius:4px;cursor:pointer}
+            #transcript-panel{background:#000;color:#ffdf00;padding:12px;margin-top:8px;border-radius:4px;max-height:40vh;overflow:auto}
+            #transcript-panel pre{white-space:pre-wrap;color:#ffffff;font-family:inherit}
+            /* Chat message styling */
+            .chat-block{margin:6px 0;padding:6px;border-radius:4px}
+            .chat-label{display:block;font-size:0.9em;color:#ffdf00;margin-bottom:4px}
+            .chat-user pre{color:#ffffff;margin:0;background:transparent;border:none;padding:0;white-space:pre-wrap}
+            .chat-assistant pre{color:#ffdf00;margin:0;background:transparent;border:none;padding:0;white-space:pre-wrap}
+            /* Hide assistant labels for transcript/docx-rendered content */
+            .transcript-block.transcript-assistant .transcript-label{display:none}
+            .report-block.report-assistant .report-label{display:none}
+          </style>
+        </head>
+        <body>
+          <div id="report-container">
+            <button id="report-toggle" aria-expanded="false">Show Report</button>
+            <div id="report-panel" hidden>
+              <div id="report-inner">Loading report…</div>
+            </div>
+          </div>
+
+          <div id="transcript-container">
+            <button id="transcript-toggle" aria-expanded="false">Chat</button>
+            <div id="transcript-panel" hidden>
+              <div id="transcript-inner">Loading chat…</div>
+            </div>
+          </div>
+          <div id="app">
+            <header>
+              <h1>Steelers Players — Map</h1>
+              <input id="search" placeholder="Search players, colleges, positions..." autofocus />
+            </header>
+            <main>
+              <div id="map"></div>
+            </main>
+            <footer>
+              <small>Data from `combined_table.db` via `queries.sql` (pre-generated `players.geojson`) —
+                <a href="https://github.com/Ktheigley2559/Final_Project_2" target="_blank" rel="noopener noreferrer">Repository</a>
+              </small>
+            </footer>
+          </div>
+
+          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+          <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+          <script>
+            (function(){
+              const btn = document.getElementById('report-toggle');
+              const panel = document.getElementById('report-panel');
+              const inner = document.getElementById('report-inner');
+              function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+              async function loadReport(){
+                try{
+                  const candidates = ['report.txt','./report.txt','/report.txt'];
+                  let txt = null;
+                  for(const p of candidates){
+                    try{ const r = await fetch(p); if(r.ok){ txt = await r.text(); break; } }catch(e){}
+                  }
+                  if(txt===null){ inner.textContent = 'Unable to load report.'; return; }
+                  const marker = '<!-- HTML_REPORT -->';
+                  if(txt.trim().startsWith(marker)){
+                    inner.innerHTML = txt.replace(marker,'');
+                  } else {
+                    inner.innerHTML = '<pre>' + escapeHtml(txt) + '</pre>';
+                  }
+                }catch(e){ inner.textContent = 'Error loading report.'; }
+              }
+              btn.addEventListener('click', async function(){
+                const hidden = panel.hasAttribute('hidden');
+                if(hidden){ panel.removeAttribute('hidden'); btn.textContent = 'Hide Report'; btn.setAttribute('aria-expanded','true'); if(inner.textContent.trim()==='Loading report…'){ await loadReport(); } }
+                else { panel.setAttribute('hidden',''); btn.textContent = 'Show Report'; btn.setAttribute('aria-expanded','false'); }
+              });
+
+              // Transcript toggle and loader
+              const tbtn = document.getElementById('transcript-toggle');
+              const tpanel = document.getElementById('transcript-panel');
+              const tinner = document.getElementById('transcript-inner');
+
+              function parseLabeledBlocks(raw){
+                const lines = raw.split(/\r?\n/);
+                const labelRe = /^---\s*(USER|ASSISTANT)\b.*---$/i;
+                const blocks = [];
+                let current = null;
+                for(const line of lines){
+                  const m = line.match(labelRe);
+                  if(m){
+                    if(current) blocks.push(current);
+                    current = { role: m[1].toUpperCase(), text: '' };
+                  } else {
+                    if(!current){ current = { role: 'ASSISTANT', text: line + '\n' }; }
+                    else { current.text += line + '\n'; }
+                  }
+                }
+                if(current) blocks.push(current);
+                return blocks;
+              }
+
+              function renderBlocks(blocks){
+                const out = document.createElement('div');
+                for(const b of blocks){
+                  const blk = document.createElement('div');
+                  blk.className = 'chat-block ' + (b.role==='USER' ? 'chat-user' : 'chat-assistant');
+                  const pre = document.createElement('pre'); pre.innerHTML = escapeHtml(b.text.trim()); blk.appendChild(pre);
+                  out.appendChild(blk);
+                }
+                tinner.innerHTML = '';
+                tinner.appendChild(out);
+              }
+
+              function autoLabelTranscript(raw){
+                const parts = raw.split(/\n{2,}/g).map(p => p.trim()).filter(Boolean);
+                const labeled = [];
+                const userHintRe = /\b(I would like|I\'d like|I want you|please|If you have any questions|I plan|Would you|Hello|Hi)\b/i;
+                const assistantHintRe = /\b(I will|I\'ll|I can|I\'m going to|I have|I started|I added|Added|Updated|Created|Completed:|What I did|What I ran|Ran|Started|Installed|python3|\.py|\.csv|\.db|`[^`]+`|```|README|Generated:|Wrote|Read)\b/i;
+                for(const p of parts){
+                  if(/^---\s*(USER|ASSISTANT)\b/i.test(p)) { labeled.push(p); continue; }
+                  if(userHintRe.test(p)) { labeled.push('--- USER ---\n' + p); continue; }
+                  if(assistantHintRe.test(p) || /\.(py|csv|db|html|json|txt)\b/i.test(p) || /`.+`/.test(p)) { labeled.push('--- ASSISTANT ---\n' + p); }
+                  else { labeled.push('--- USER ---\n' + p); }
+                }
+                return labeled.join('\n\n');
+              }
+
+              async function loadTranscript(){
+                try{
+                  const candidates = ['transcript_from_docx.txt','./transcript_from_docx.txt','/transcript_from_docx.txt','transcript.txt','./transcript.txt','/transcript.txt'];
+                  let txt = null;
+                  for(const p of candidates){
+                    try{ const r = await fetch(p); if(r.ok){ txt = await r.text(); break; } }catch(e){}
+                  }
+                  if(txt===null){ tinner.textContent = 'Unable to load chat.'; return; }
+
+                  const marker = '<!-- HTML_TRANSCRIPT -->';
+                  if(txt.trim().startsWith(marker)){
+                    tinner.innerHTML = txt.replace(marker,'');
+                    return;
+                  }
+
+                  let blocks = parseLabeledBlocks(txt);
+                  const hasLabel = blocks.some(b => b.text && b.role);
+                  if(!hasLabel){
+                    const labeled = autoLabelTranscript(txt);
+                    blocks = parseLabeledBlocks(labeled);
+                  }
+                  if(blocks && blocks.length>0){ renderBlocks(blocks); }
+                  else { tinner.innerHTML = '<pre>' + escapeHtml(txt) + '</pre>'; }
+                }catch(e){ tinner.textContent = 'Error loading chat.'; }
+              }
+
+              tbtn.addEventListener('click', async function(){
+                const hidden = tpanel.hasAttribute('hidden');
+                if(hidden){ tpanel.removeAttribute('hidden'); tbtn.textContent = 'Hide Chat'; tbtn.setAttribute('aria-expanded','true'); if(tinner.textContent.trim()==='Loading chat…'){ await loadTranscript(); } }
+                else { tpanel.setAttribute('hidden',''); tbtn.textContent = 'Chat'; tbtn.setAttribute('aria-expanded','false'); }
+              });
+
+            })();
+          </script>
+          <script src="/static/app.js"></script>
+        </body>
+      </html>
+                    labeled.push('--- USER ---\n' + p);

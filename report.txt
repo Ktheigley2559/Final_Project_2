@@ -1,0 +1,193 @@
+<!-- HTML_REPORT -->
+<div class="report-root"><div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span></span><span></span><span></span><span>Final Project – Football Analytics</span><span></span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Hello, this is Kaden </span><span>Heigley’s</span><span> final project for Football Analytics. The final project is a map of </span><span>all</span><span> the current steelers players on the r</span><span>oster, plus the free agents and draft picks they team has picked up for the most recent draft/season of the National Football League (NFL). How this project will work is that it will display a </span><span>map of the United States, and have markers of every player, </span><span>free agent, and draft pick member. When someone hovers or clicks on a marker, it will show the player/free agent/draft pick’s name, position, and where they graduated, where the marker demonstrates the location of the college </span><span>that the person attended. </span><span>This project is meant to show </span><span>how unique each team is, and is more representative of the </span><span>community of football</span><span>, where you can play anywhere, regardless of where you came from. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">HTTPS + Parser for Scraping</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">pip</span><span style="color:#EE0000;"> install requests beautifulsoup4 </span><span style="color:#EE0000;">lxml</span><span style="color:#EE0000;"> pandas</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">import requests</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">from bs4 import </span><span style="color:#EE0000;">BeautifulSoup</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session = </span><span style="color:#EE0000;">requests.Session</span><span style="color:#EE0000;">()</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session.headers</span><span style="color:#EE0000;">.</span><span style="color:#EE0000;">update</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">{</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    'User-Agent': 'FinalProject2-Scraper/1.0 (+https://your.project.url/)'</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">})</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">url</span><span style="color:#EE0000;"> = 'https://example.com/page'</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">resp = </span><span style="color:#EE0000;">session.get</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">url</span><span style="color:#EE0000;">, timeout=10)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">resp.raise</span><span style="color:#EE0000;">_for_</span><span style="color:#EE0000;">status</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">soup = </span><span style="color:#EE0000;">BeautifulSoup</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">resp.text</span><span style="color:#EE0000;">, '</span><span style="color:#EE0000;">lxml</span><span style="color:#EE0000;">')   </span><span style="color:#EE0000;"># </span><span style="color:#EE0000;">lxml</span><span style="color:#EE0000;"> parser recommended</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;"># Example: find first table and extract rows</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">table = </span><span style="color:#EE0000;">soup.find</span><span style="color:#EE0000;">('table')</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">rows = []</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">if table:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    for tr in </span><span style="color:#EE0000;">table.find</span><span style="color:#EE0000;">_all</span><span style="color:#EE0000;">('tr'):</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">        cols = [</span><span style="color:#EE0000;">td.get_text</span><span style="color:#EE0000;">(strip=True) for td in </span><span style="color:#EE0000;">tr.find</span><span style="color:#EE0000;">_all</span><span style="color:#EE0000;">(['td','</span><span style="color:#EE0000;">th</span><span style="color:#EE0000;">'])]</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">        if cols:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">            </span><span style="color:#EE0000;">rows.append</span><span style="color:#EE0000;">(cols)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;"># rows now </span><span style="color:#EE0000;">contains</span><span style="color:#EE0000;"> list-of-lists you can write to CSV</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">import requests</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">from </span><span style="color:#EE0000;">requests.adapters</span><span style="color:#EE0000;"> import </span><span style="color:#EE0000;">HTTPAdapter</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">from </span><span style="color:#EE0000;">urllib3.util.retry</span><span style="color:#EE0000;"> import Retry</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">from bs4 import </span><span style="color:#EE0000;">BeautifulSoup</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session = </span><span style="color:#EE0000;">requests.Session</span><span style="color:#EE0000;">()</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session.headers</span><span style="color:#EE0000;">.</span><span style="color:#EE0000;">update</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">{'User-Agent': 'FinalProject2-Scraper/1.0 (+https://your.project.url/</span><span style="color:#EE0000;">)'}</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">retries</span><span style="color:#EE0000;"> = </span><span style="color:#EE0000;">Retry(</span><span style="color:#EE0000;">total=3, </span><span style="color:#EE0000;">backoff_factor</span><span style="color:#EE0000;">=0.8, </span><span style="color:#EE0000;">status_forcelist</span><span style="color:#EE0000;">=[</span><span style="color:#EE0000;">429, 500, 502, 503, 504])</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">adapter</span><span style="color:#EE0000;"> = </span><span style="color:#EE0000;">HTTPAdapter</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">max_retries</span><span style="color:#EE0000;">=retries)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session.mount</span><span style="color:#EE0000;">('https://', adapter)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session.mount</span><span style="color:#EE0000;">('http://', adapter)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">resp = </span><span style="color:#EE0000;">session.get</span><span style="color:#EE0000;">('https://example.com', </span><span style="color:#EE0000;">timeout=15)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">resp.raise</span><span style="color:#EE0000;">_for_</span><span style="color:#EE0000;">status</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">soup = </span><span style="color:#EE0000;">BeautifulSoup</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">resp.text</span><span style="color:#EE0000;">, '</span><span style="color:#EE0000;">lxml</span><span style="color:#EE0000;">')</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">import csv</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">from bs4 import </span><span style="color:#EE0000;">BeautifulSoup</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">import requests</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session = </span><span style="color:#EE0000;">requests.Session</span><span style="color:#EE0000;">()</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">session.headers</span><span style="color:#EE0000;">.</span><span style="color:#EE0000;">update</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">{'User-Agent': 'FinalProject2-Scraper/</span><span style="color:#EE0000;">1.0'}</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">url</span><span style="color:#EE0000;"> = 'https://en.wikipedia.org/wiki/2025_Pittsburgh_Steelers_season'</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">r = </span><span style="color:#EE0000;">session.get</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">url</span><span style="color:#EE0000;">, timeout=10)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">r.raise</span><span style="color:#EE0000;">_for_</span><span style="color:#EE0000;">status</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">soup = </span><span style="color:#EE0000;">BeautifulSoup</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">r.text</span><span style="color:#EE0000;">, '</span><span style="color:#EE0000;">lxml</span><span style="color:#EE0000;">')</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">table = </span><span style="color:#EE0000;">soup.find</span><span style="color:#EE0000;">('table</span><span style="color:#EE0000;">', {</span><span style="color:#EE0000;">'class': '</span><span style="color:#EE0000;">wikitable</span><span style="color:#EE0000;">'}</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">with </span><span style="color:#EE0000;">open(</span><span style="color:#EE0000;">'draft_picks.csv', 'w', newline</span><span style="color:#EE0000;">=''</span><span style="color:#EE0000;">, encoding='utf-8') as f:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    writer = </span><span style="color:#EE0000;">csv.writer</span><span style="color:#EE0000;">(f)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    for tr in </span><span style="color:#EE0000;">table.find</span><span style="color:#EE0000;">_all</span><span style="color:#EE0000;">('tr'):</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">        cols = [</span><span style="color:#EE0000;">td.get_text</span><span style="color:#EE0000;">(strip=True) for td in </span><span style="color:#EE0000;">tr.find</span><span style="color:#EE0000;">_all</span><span style="color:#EE0000;">(['td','</span><span style="color:#EE0000;">th</span><span style="color:#EE0000;">'])]</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">        if cols:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">            </span><span style="color:#EE0000;">writer.writerow</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">cols</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">import pandas as pd</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;"># </span><span style="color:#EE0000;">Databayou</span><span style="color:#EE0000;"> sometimes requires latin1</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">colleges = </span><span style="color:#EE0000;">pd.read</span><span style="color:#EE0000;">_</span><span style="color:#EE0000;">csv</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">'college_raw.csv', encoding='latin1')</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;"># Normalize column names, keep relevant fields:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">colleges = </span><span style="color:#EE0000;">colleges.rename</span><span style="color:#EE0000;">(columns</span><span style="color:#EE0000;">={'</span><span style="color:#EE0000;">Name':'name','Address':'address','City':'city','State':'state'</span><span style="color:#EE0000;">})  #</span><span style="color:#EE0000;"> adjust to actual header names</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">colleges.to_</span><span style="color:#EE0000;">csv</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">'colleges.csv', index=False)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">import </span><span style="color:#EE0000;">urllib.robotparser</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">rp</span><span style="color:#EE0000;"> = </span><span style="color:#EE0000;">urllib.robotparser</span><span style="color:#EE0000;">.</span><span style="color:#EE0000;">RobotFileParser</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">rp.set_url</span><span style="color:#EE0000;">('https://example.com/robots.txt')</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">rp.read</span><span style="color:#EE0000;">()</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">if </span><span style="color:#EE0000;">rp.can_</span><span style="color:#EE0000;">fetch</span><span style="color:#EE0000;">(</span><span style="color:#EE0000;">'*', 'https://example.com/</span><span style="color:#EE0000;">somepage</span><span style="color:#EE0000;">'):</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    # OK to fetch</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    pass</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">else:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    # don't fetch — site disallows</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span style="color:#EE0000;">    pass</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>WEB Pages/URLS &amp; Why</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-needed locations of where each university/college is located</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>.</span><span> </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-needed names of the current roster, along with where they attended each university.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span> </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-needed names of </span><span>all</span><span> the current draft picks and free agents, along with where they attended each university. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span> </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-</span><span>needed the exact location of this specific institution because it showed up null in a previous query. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Tools</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Leaflet/</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-provides the map of the United </span><span>States and</span><span> can work with the data that I had collected. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Python</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-helps understand and run the code needed to run the webapp, queries, and more. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Pandas</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-helps </span><span>make/import numerical data and other kinds of data correctly. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>BeautifulSoup</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-Used for scrap</span><span>ing the Pages of websites for data</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Data</span><span>base</span><span> (Tables, CSV Fil</span><span>es, etc.)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Names</span><span> </span><span>of</span><span> CSV Files</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>College_raw</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Colleges</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Combined_table</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Current_roster</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Draft_picks</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Free_agents</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Names</span><span> </span><span>of</span><span> </span><span>Databases</span><span>,</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Combined_table</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Names of Columns a</span><span>nd what they record:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Name:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records </span><span>the player’s</span><span> name</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Position</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records the position of the player</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>College</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records the name of the College/university the player</span><span>, draftee, or free agent in question.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>College_address</span><span>, </span><span>Addr</span><span>, Address</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	</span><span>-</span><span>Records the address of the </span><span>College/University to help with a location on a map. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>City</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	</span><span>-</span><span>Records the name of the city to help with location on a map</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>State</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	</span><span>-</span><span>Records the name of the State of one of the United State’s 50.</span><span> Helps with Location on a map.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Team_Status</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records what the status is of each player. Whether they are a current player</span><span> of the current roster of the current team, a draft pick, or a free agent. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>ZIP</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records the zip code number for each college</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Country</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records the country each college is in</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Lat</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records the latitude of each college’s location.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Long</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-records the </span><span>longitude</span><span> of each college’s location</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Source:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-where the information was pulled from (</span><span>scrapped</span><span> page’s URL)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Player_source</span><span>:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-where the information pertaining to the player was pulled from</span><span>.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>College_source</span><span>:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	-where the information pertaining to the college/university was </span><span>pulled from.</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>Queries</span><span> (</span><span>Queries.sql</span><span>):</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>	</span><span>SELECT name, position, college, </span><span>college_address</span><span>, city, state, </span><span>team_status</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>FROM </span><span>combined_table</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>How to Use the Webapp:</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>When you arrive on the page, </span><span>there is a search bar above a map of the United States of America. There should be different symbols on the map. Clicking on glowing </span><span>orbs with numbers on them zoom in on the area you clicked on. Clicking on the Blue Markers will show the player’s name, position</span><span>, the name of the college/university they </span><span>graduated from</span><span>, and </span><span>their player status (Player, Free Agent, Draft pick). The marker will reflect</span><span> the </span><span>location of</span><span> </span><span>a branch of the campus they attended. If not exactly the main campus, whether </span><span>it is a smaller</span><span> branch, or a campus of a similar name</span><span>, but no affiliation. </span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>(White = User)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre><span>(Red = AI)</span></pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div>
+<div class="report-block report-assistant"><div class="report-label">ASSISTANT</div><pre>
+</pre></div></div>

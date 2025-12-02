@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Report (Rendered)</title>
+    <style>
+      body{ margin:0; padding:8px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial; color: #ffea00; background:#000; }
+      h1{ font-size:16px; margin:0 0 8px 0; }
+      p{ margin:6px 0; color:#ffea00; }
+      ul{ margin:6px 0 12px 18px; color:#ffea00; }
+      code{ background:#111; padding:2px 4px; border-radius:4px; color:#ffea00; }
+    </style>
+  </head>
+  <body>
+    <h1>Final Project – Football Analytics</h1>
+    <p>Hello, this is Kaden Heigley’s final project for Football Analytics. The final project is a map of all the current Steelers players on the roster, plus the free agents and draft picks the team has picked up for the most recent draft/season of the National Football League (NFL).</p>
+    <p>The map displays the United States with markers for every player, free agent, and draft pick. Clicking a marker shows the person's name, position, and college. The marker demonstrates the college location.</p>
+
+    <h2>WEB Pages / URLs & Purpose</h2>
+    <ul>
+      <li>Steelers roster: <a href="https://www.steelers.com/team/players-roster/" target="_blank" rel="noopener">steelers.com/team/players-roster</a></li>
+      <li>Wikipedia season page: <a href="https://en.wikipedia.org/wiki/2025_Pittsburgh_Steelers_season#" target="_blank" rel="noopener">2025 Pittsburgh Steelers season</a></li>
+      <li>Traveling to Campus / New Student Orientation: used to confirm campus addresses</li>
+    </ul>
+
+    <h2>Tools</h2>
+    <ul>
+      <li>Leaflet — map rendering</li>
+      <li>Python — data processing and scripts</li>
+      <li>Pandas — CSV and table handling</li>
+      <li>BeautifulSoup — scraping</li>
+    </ul>
+
+    <h2>Files / DB</h2>
+    <p>CSV files: <code>college_raw</code>, <code>colleges</code>, <code>combined_table</code>, <code>current_roster</code>, <code>draft_picks</code>, <code>free_agents</code></p>
+    <p>Database: <code>combined_table.db</code> with table <code>combined_table</code></p>
+
+    <h2>Columns (example)</h2>
+    <ul>
+      <li><b>name</b> — player's name</li>
+      <li><b>position</b> — position</li>
+      <li><b>college</b> — college/university</li>
+      <li><b>college_address</b>, <b>city</b>, <b>state</b>, <b>zip</b> — for geolocation</li>
+      <li><b>team_status</b> — Player / Free Agent / Draft</li>
+      <li><b>lat</b>, <b>long</b> — coordinates for mapping</li>
+    </ul>
+
+    <h2>Queries</h2>
+    <pre style="background:#111;color:#ffea00;padding:8px;border-radius:6px;">SELECT name, position, college, college_address, city, state, team_status
+FROM combined_table</pre>
+
+    <h2>How to Use the Webapp</h2>
+    <p>Open the map page, use the search bar to filter by name/college/position. Click markers to view details. The app loads <code>players.geojson</code> generated from the database.</p>
+  </body>
+</html>

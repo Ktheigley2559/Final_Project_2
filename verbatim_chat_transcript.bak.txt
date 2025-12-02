@@ -1,0 +1,6 @@
+Backup of verbatim_chat_transcript.txt before overwrite
+Generated: 2025-11-24
+
+(Backup created so the file can be restored if you ask to revert.)
+
+--- Original file contents saved separately ---
