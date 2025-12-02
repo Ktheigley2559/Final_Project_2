@@ -46,10 +46,10 @@ async function fetchPlayers(){
   }
 
   const candidates = [
-    '/players.geojson',
     'players.geojson',
     './players.geojson',
-    '../players.geojson'
+    '../players.geojson',
+    '/players.geojson'
   ];
   const fc = await fetchAnyJson(candidates);
   allFeatures = (fc && fc.features) ? fc.features : fc || [];
