@@ -1,3 +1,9 @@
+Source URLs (plain text):
+https://databayou.com/usofa/colleges.html
+https://www.steelers.com/team/players-roster/
+https://en.wikipedia.org/wiki/2025_Pittsburgh_Steelers_season
+https://orientation.stanford.edu/moving-stanford/traveling-campus
+
 Hello! I would like you to scrub these three websites for some data I am looking for. https://databayou.com/usofa/colleges.html, https://www.steelers.com/team/players-roster/., and https://en.wikipedia.org/wiki/2025_Pittsburgh_Steelers_season#. For the wikipedia pages, I would like you to create CSV files for the draft picks, free agents, and the current roster of the Pittsburgh Steelers. For these, I would like you to capture the players names, position, and what college they graduated from. For the databy you.com, I would like you to record the names of all of the colleges, and to capture their address, city, county, and state. If you have any questions before doing this, please let me know. When scraping the data, please make sure all the data is imported into one table. Please ask me questions before you start for anything you need to know that I did not specify.
 
 I will create a short plan for the scraping work and then ask a few clarifying questions before I start fetching pages and writing CSVs.
