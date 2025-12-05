@@ -112,33 +112,7 @@
                   } else {
                     inner.innerHTML = '<pre>' + escapeHtml(txt) + '</pre>';
                   }
-                  // Add links to raw scraped pages (if present) at top of report panel
-                  const rawCandidates = ['raw_databayou.html','raw_steelers.html','raw_wikipedia.html'];
-                  const available = [];
-                  await Promise.all(rawCandidates.map(async (u)=>{
-                    try{ const r = await fetch(u); if(r.ok){ available.push(u); } }catch(e){}
-                  }));
-                  if(available.length){
-                    // Map local raw filenames to their original remote URLs
-                    const urlMap = {
-                      'raw_databayou.html': 'https://databayou.com/usofa/colleges.html',
-                      'raw_steelers.html': 'https://www.steelers.com/team/players-roster/',
-                      'raw_wikipedia.html': 'https://en.wikipedia.org/wiki/2025_Pittsburgh_Steelers_season',
-                      'raw_stanford.html': 'https://orientation.stanford.edu/moving-stanford/traveling-campus'
-                    };
-                    const nav = document.createElement('div'); nav.style.marginBottom='10px';
-                    const title = document.createElement('div'); title.textContent = 'Scraped pages:'; title.style.fontWeight = '700'; title.style.marginBottom = '6px';
-                    nav.appendChild(title);
-                    for(const u of available){
-                      const text = document.createElement('div'); text.style.marginTop='6px';
-                      const remote = urlMap[u] || u;
-                      // Show plain URL text (no hyperlink)
-                      text.textContent = remote;
-                      text.style.color = '#ffdf00';
-                      nav.appendChild(text);
-                    }
-                    inner.insertBefore(nav, inner.firstChild);
-                  }
+                  // (Scraped pages list intentionally removed from report panel)
                 }catch(e){ inner.textContent = 'Error loading report.'; }
               }
               btn.addEventListener('click', async function(){
